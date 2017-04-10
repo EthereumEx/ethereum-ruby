@@ -1,18 +1,18 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ethereum/version'
+require 'ethereumex/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ethereum"
-  spec.version       = Ethereum::VERSION
-  spec.authors       = ["DigixGlobal Pte Ltd (https://dgx.io)"]
-  spec.email         = ["ace@dgx.io"]
+  spec.name          = "ethereumex"
+  spec.version       = EthereumEx::VERSION
+  spec.authors       = ["Shawn Cicoria"]
+  spec.email         = ["github@cicoria.com"]
 
-  spec.summary       = %q{Ethereum libraries for Ruby}
-  spec.description   = %q{Ethereum libraries for ruby programming language.}
-  spec.homepage      = "https://github.com/DigixGlobal/ethereum-ruby"
-  spec.license       = "GPL"
+  spec.summary       = %q{Ethereum libraries for Ruby updated}
+  spec.description   = %q{Ethereum libraries for ruby programming language updated.}
+  spec.homepage      = "https://github.com/ethereumex/ethereum-ruby"
+  spec.license       = "MIT"
 
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = "https://rubygems.org"
@@ -21,6 +21,8 @@ Gem::Specification.new do |spec|
   end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  puts(lib)
+  puts(spec.files)
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib", "bin"]

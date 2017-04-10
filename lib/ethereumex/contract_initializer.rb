@@ -1,4 +1,4 @@
-module Ethereum
+module EthereumEx
 
   class ContractInitializer
 

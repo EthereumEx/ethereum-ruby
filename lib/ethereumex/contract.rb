@@ -1,4 +1,4 @@
-module Ethereum
+module EthereumEx
   class Contract
 
     attr_accessor :code, :name, :functions, :abi, :constructor_inputs, :events
@@ -11,10 +11,10 @@ module Ethereum
       @events = []
       @constructor_inputs = @abi.detect {|x| x["type"] == "constructor"}["inputs"] rescue nil
       @abi.select {|x| x["type"] == "function" }.each do |abifun|
-        @functions << Ethereum::Function.new(abifun) 
+        @functions << EthereumEx::Function.new(abifun) 
       end
       @abi.select {|x| x["type"] == "event" }.each do |abievt|
-        @events << Ethereum::ContractEvent.new(abievt)
+        @events << EthereumEx::ContractEvent.new(abievt)
       end
     end
 
@@ -32,7 +32,7 @@ module Ethereum
         end
 
         define_method :deploy do |*params|
-          formatter = Ethereum::Formatter.new
+          formatter = EthereumEx::Formatter.new
           deploy_code = binary
           deploy_arguments = ""
           if constructor_inputs.present?
@@ -44,7 +44,7 @@ module Ethereum
           end
           deploy_payload = deploy_code + deploy_arguments
           deploytx = connection.send_transaction({from: self.sender, gas: self.gas, gasPrice: self.gas_price, data: "0x" + deploy_payload})["result"]
-          instance_variable_set("@deployment", Ethereum::Deployment.new(deploytx, connection))
+          instance_variable_set("@deployment", EthereumEx::Deployment.new(deploytx, connection))
         end
 
         define_method :events do
